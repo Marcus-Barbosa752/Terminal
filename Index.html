@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal</title>
+    <link rel="shortcut icon" href="Assets/Images/terminal.png" type="image/x-icon">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>  
+    <link rel="stylesheet" href="Assets/Style/Index.css">
+</head>
+<body>
+    
+    <header>
+        <h4>Terminal <span id="SpanInsertModeLinguagem">Python</span></h4>
+
+        <div class="TerminalControls">
+            <button id="btnPlay"><i class="fi fi-sr-play"></i>Play</button>
+            <button id="btnPause"><i class="fi fi-sr-pause"></i>Pause</button>
+            <button id="btnClear"><i class="fi fi-sr-trash-xmark"></i>Limpar</button>
+        </div>
+
+        <ul>
+            <li id="LiModeLinguagem"><i class="fi fi-sr-code-window"></i>Linguagem</li>
+            <li id="LiAjustes"><i class="fi fi-sr-settings"></i>Ajustes</li>
+        </ul>
+    </header>
+
+    <textarea id="term" placeholder="Digite algo"></textarea>
+
+    <!-- Selecione a linguagem desejada -->
+    <section class="SelectLanguager" id="SelectLanguager">
+        <input type="text" class="EscolharLinguagem" id="EscolharLinguagem" value="Python" disabled>
+
+        <section class="SelectLanguagerOptions">
+            <span id="SpanLinguagerSelect">Todos</span>
+            <span id="SpanLinguagerSelect" class="SpanLinguagerSelect">Python</span>
+            <span id="SpanLinguagerSelect">C++</span>
+            <span id="SpanLinguagerSelect">Java</span>
+            <span id="SpanLinguagerSelect">Javascript</span>
+        </section>
+    </section>
+
+    <!-- Ajustes -->
+    <section class="Ajustes" id="Ajustes">
+        <h4>Velocidade</h4>
+
+        <div type="text" class="InputSelectVelocidadeCode" id="InputSelectVelocidadeCode" value="Normal" list="SelectVelocidadeCodeOptions">Normal</div>
+
+        <section class="SelectVelocidadeCodeOptions" id="SelectVelocidadeCodeOptions">
+            <span id="SpanVelocidadeCodeSelect" class="SpanVelocidadeCodeSelect">Normal</span>
+            <span id="SpanVelocidadeCodeSelect">Fast</span>
+            <span id="SpanVelocidadeCodeSelect">Ultra rápido</span>
+        </section>
+
+        <h4>Tamanho do texto</h4>
+        <div class="SelecionFontSize">
+            <input type="range" id="InputSelectFontSize" value="17" step="0.5" min="12" max="50">
+            <span id="SpanSelectFontSize">17px</span>
+        </div>
+
+        <h4>Cor do texto</h4>
+        <div class="SelecioneCorTexto" id="SelecioneCorTexto">
+            <input type="color" id="InputSelectFontColor">
+            OU
+            <input type="text" id="InputSetFontColor" placeholder="#333">
+        </div>
+    </section>
+
+    <script src="Assets/Javascript/Load.js"></script>
+    <script src="Assets/Javascript/Nav.js"></script>
+    <script type="module" src="Assets/Javascript/Terminal.js"></script>
+</body>
+</html>

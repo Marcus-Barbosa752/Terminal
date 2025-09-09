@@ -1,0 +1,290 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+body {
+    background: linear-gradient(to bottom, #111, #222, #111);
+    height: 100vh;
+}
+header {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+header h4 {
+    color: white;
+    font-size: 20px;
+}
+header h4 span {
+    padding: 5px 10px;
+    background: white;
+    color: black;
+    border-radius: 5px;
+    font-size: 17px;
+}
+header .TerminalControls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: black;
+    border-radius: 5px;
+}
+header .TerminalControls button {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    border-radius: inherit;
+    background: none;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+header .TerminalControls button:hover {
+    background: white;
+    color: black;
+}
+header .TerminalControls button:nth-child(2) {
+    display: none;
+}
+header ul {
+    color: white;
+    display: flex;
+    align-items: center;
+    
+    list-style: none;
+    font-weight: bold;
+    font-size: 17px;
+    position: relative;
+}
+header ul li {
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 20px;
+}
+header ul:hover li {
+    color: #ffffff64;
+}
+header ul li:hover {
+    color: white;
+    letter-spacing: 2px;
+}
+header ul li.LiNavHeaderActive {
+    background: white;
+    color: black;
+    border-radius: 10px;
+}
+textarea {
+    width: 100vw;
+    height: calc(100vh - 70px);
+    resize: none;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 5px;
+    font-size: 17px;
+    color: white;
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 2px;
+    color: rgb(55, 255, 0);
+}
+textarea::-webkit-scrollbar {
+    width: 5px;
+}
+textarea::-webkit-scrollbar-thumb {
+    background: rgb(55, 255, 0);
+    border-radius: 10px;
+}
+textarea::placeholder {color: white;}
+textarea:focus {
+    background: #111;
+}
+section.SelectLanguager {
+    position: absolute;
+    top: 70px;
+    right: 5%;
+    width: 300px;
+    height: 0;
+    padding: 0;
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    transition: .4s ease-in-out;
+}
+section.SelectLanguager.SelectLanguagerActivate {
+    padding: 10px;
+    height: auto;
+    animation: Height .4s ease-in-out;
+    z-index: 1;
+}
+@keyframes Height {
+    0% {
+        padding: 0;
+        height: 0;
+    }
+    100% {
+        padding: 10px;
+        height: auto;
+    }
+}
+section.SelectLanguager .EscolharLinguagem {
+    width: 100%;
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border-radius: inherit;
+    cursor: pointer;
+    font-size: 17px;
+}
+section.SelectLanguager .SelectLanguagerOptions {
+    width: 100%;
+    background: #111;
+    padding: 10px;
+    border-radius: inherit;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+section.SelectLanguager .SelectLanguagerOptions span {
+    width: 100%;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: inherit;
+    font-weight: bold;
+}
+section.SelectLanguager .SelectLanguagerOptions span.SpanLinguagerSelect {
+    background: black;
+    box-shadow: 0 0 10px black;
+}
+section.SelectLanguager .SelectLanguagerOptions span.SpanLinguagerSelect:hover {
+    background: greenyellow;
+}
+section.SelectLanguager .SelectLanguagerOptions span:hover {
+    background: white;
+    color: black;
+}
+section.Ajustes {
+    position: absolute;
+    background: black;
+    box-shadow: 0 0 10px black;
+    transition: .4s ease-in-out;
+    top: 70px;
+    right: 5%;
+    width: 300px;
+    height: 0;
+    padding: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+section.Ajustes.AjustesActive {
+    height: auto;
+    padding: 10px;
+}
+section.Ajustes h4 {
+    color: white;
+    margin: 10px;
+    font-size: 20px;
+}
+section.Ajustes .InputSelectVelocidadeCode {
+    color: black;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background: white;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+section.Ajustes .SelectVelocidadeCodeOptions {
+    width: 100%;
+    height: 0;
+    padding: 10px 15px;
+    padding: 0;
+    overflow: hidden;
+    background: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+section.Ajustes .SelectVelocidadeCodeOptions.SelectVelocidadeCodeOptionsActivate {
+    padding: 10px 15px;
+    height: auto;
+}
+section.Ajustes .SelectVelocidadeCodeOptions span {
+    width: 100%;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+}
+section.Ajustes .SelectVelocidadeCodeOptions span:hover,
+section.Ajustes .SelectVelocidadeCodeOptions span.SpanVelocidadeCodeSelect {
+    background: black;
+    color: white;
+    border-radius: 10px;
+}
+section.Ajustes .SelecionFontSize {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 10px;
+}
+section.Ajustes .SelecionFontSize input {
+    accent-color: rgb(21, 255, 0);
+    width: 70%;
+}
+section.Ajustes .SelecionFontSize span {
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+}
+section.Ajustes .SelecioneCorTexto {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+}
+section.Ajustes .SelecioneCorTexto input[type="color"] {
+    background: none;
+    border: solid white 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+section.Ajustes .SelecioneCorTexto input[type="text"] {
+    width: 60%;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    color: black;
+    font-size: 15px;
+    font-weight: bold;
+}
+section.Ajustes .SelecioneCorTexto input[type="text"]::placeholder {
+    color: black;
+}
