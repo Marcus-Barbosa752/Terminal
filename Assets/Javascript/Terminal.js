@@ -7,15 +7,20 @@ const btnPlay = document.getElementById("btnPlay")
 const btnPause = document.getElementById("btnPause")
 const btnClear = document.getElementById("btnClear")
 
+// Opções de linguagem e velocidade
+const LinguagemOptions = document.querySelectorAll(".SelectLanguagerOptions span")
+const VelocidadeOptions = document.querySelectorAll(".SelectVelocidadeCodeOptions span")
+
 let running = false
 let interval = null
-let isTyping = false
+let currentLine = ""
+let currentIndex = 0
 
 const codeSamples = {
-    ...Python["Python"],
-    ...Cpp["C++"],
-    ...Java["Java"],
-    ...Javascript["Javascript"],
+    Python: Python["Python"],
+    "C++": Cpp["C++"],
+    Java: Java["Java"],
+    Javascript: Javascript["Javascript"],
     "Todos": []
 }
 
@@ -24,6 +29,8 @@ const speedModes = {
     "Fast": 5,
     "Ultra rápido": 10
 }
+
+// ======== LÓGICA PRINCIPAL ========
 
 function gerarLinha(linguagem) {
     let pool = []
@@ -41,47 +48,56 @@ function gerarLinha(linguagem) {
     return pool[Math.floor(Math.random() * pool.length)] || ""
 }
 
-let currentLine = ""
-let currentIndex = 0
-
 function escreverCodigo() {
-    if (!running || isTyping) return
+    if (!running) return
 
-    const linguagem = (EscolherLinguagem && EscolherLinguagem.textContent) ? EscolherLinguagem.textContent : "Todos"
-    const velocidade = (InputSelectVelocidadeCodes && InputSelectVelocidadeCodes.textContent) ? InputSelectVelocidadeCodes.textContent : "Normal"
+    const linguagem = EscolherLinguagem?.value || "Todos"
+    const velocidade = InputSelectVelocidadeCodes?.textContent?.trim() || "Normal"
     const step = speedModes[velocidade] || 1
 
-    // Se não há linha atual ou chegou ao fim, gera nova linha
+    // Gera nova linha se terminou a atual
     if (!currentLine || currentIndex >= currentLine.length) {
         currentLine = gerarLinha(linguagem) + "\n"
         currentIndex = 0
     }
 
-    // Escreve apenas a quantidade de caracteres definida pela velocidade
-    if (currentIndex < currentLine.length) {
-        const caracteresParaEscrever = Math.min(step, currentLine.length - currentIndex)
-        const novosCaracteres = currentLine.substr(currentIndex, caracteresParaEscrever)
-        
-        term.value += novosCaracteres
-        term.scrollTop = term.scrollHeight
-        currentIndex += caracteresParaEscrever
-    }
+    // Escreve o código gradualmente
+    const caracteresParaEscrever = Math.min(step, currentLine.length - currentIndex)
+    const novosCaracteres = currentLine.substr(currentIndex, caracteresParaEscrever)
+
+    term.value += novosCaracteres
+    term.scrollTop = term.scrollHeight
+    currentIndex += caracteresParaEscrever
 }
 
-// Event listener para quando usuário digita - escreve código simulado baseado na velocidade
+// ======== EVENTOS DE SELEÇÃO ========
+
+// Trocar linguagem
+LinguagemOptions.forEach(span => {
+    span.addEventListener("click", () => {
+        const valor = span.textContent.trim()
+        EscolherLinguagem.value = valor
+        document.getElementById("SpanInsertModeLinguagem").textContent = valor
+    })
+})
+
+// Trocar velocidade
+VelocidadeOptions.forEach(span => {
+    span.addEventListener("click", () => {
+        InputSelectVelocidadeCodes.textContent = span.textContent.trim()
+    })
+})
+
+// ======== EVENTO TECLADO ========
+
 term.addEventListener('keydown', (event) => {
-    // Previne que a tecla digitada apareça no terminal
     event.preventDefault()
-    
-    if (!running) {
-        running = true
-    }
-    
-    // A cada tecla pressionada, escreve código simulado
+    if (!running) running = true
     escreverCodigo()
 })
 
-// Botões de controle
+// ======== CONTROLES ========
+
 if (btnPlay && btnPause && btnClear) {
     btnPlay.onclick = () => {
         btnPlay.style.display = 'none'
@@ -90,16 +106,18 @@ if (btnPlay && btnPause && btnClear) {
 
         running = true
 
+        const velocidade = InputSelectVelocidadeCodes?.textContent?.trim() || "Normal"
+        const intervalTime = 1000 / speedModes[velocidade]
+
         interval = setInterval(() => {
             if (running) escreverCodigo()
-        }, 800)
+        }, intervalTime)
     }
 
     btnPause.onclick = () => {
         btnPlay.style.display = 'flex'
         btnPause.style.display = 'none'
-
-        running = false;
+        running = false
         if (interval) {
             clearInterval(interval)
             interval = null
@@ -110,5 +128,14 @@ if (btnPlay && btnPause && btnClear) {
         term.value = ""
         currentLine = ""
         currentIndex = 0
+        running = false
+
+        if (interval) {
+            clearInterval(interval)
+            interval = null
+        }
+
+        btnPlay.style.display = 'flex'
+        btnPause.style.display = 'none'
     }
 }
